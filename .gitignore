@@ -75,3 +75,6 @@ screenlog*
 !data/demand/unsd/paths/Energy_Statistics_Database.xlsx
 site/
 doc/img/gen_*.svg
+
+# Exclude KZ-specific files
+!data/kz_model/custom_powerplants.csv
