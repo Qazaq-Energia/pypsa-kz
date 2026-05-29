@@ -63,7 +63,6 @@ SECDIR = run["sector_name"] + "/" if run.get("sector_name") else ""
 SDIR = config["summary_dir"].strip("/") + f"/{SECDIR}"
 RESDIR = config["results_dir"].strip("/") + f"/{SECDIR}"
 
-load_data_paths = get_load_paths_gegis("data", config)
 ATLITE_NPROCESSES = config["atlite"].get("nprocesses", 4)
 
 
@@ -286,24 +285,29 @@ rule build_shapes:
 def retrieve_subregion(script_name):
     """
     Select whether scripts related to subregions should be retrieved.
+
+    Offshore subregion shapes can be generated from subregion shapes, or provided as a separate custom file.
     """
-    subregion_config = config.get("subregion", {"method": False, "apply_on": []})
+    subregion_config = config.get("subregion", {"apply_on": []})
 
     if script_name not in subregion_config["apply_on"]:
         return {}
 
     method = subregion_config["method"]
+    subregion_offshore = "resources/" + RDIR + "shapes/offshore_shapes.geojson"
 
     if method == "gadm":
         subregion_shapes = "resources/" + RDIR + "shapes/subregion_shapes.geojson"
     elif method == "custom":
         subregion_shapes = subregion_config["path_custom_shapes"]
+        if subregion_config["path_custom_offshore"]:
+            subregion_offshore = subregion_config["path_custom_offshore"]
     else:
         return {}
 
     return {
         "subregion_shapes": subregion_shapes,
-        "subregion_offshore": "resources/" + RDIR + "shapes/subregion_offshore.geojson",
+        "subregion_offshore": subregion_offshore,
         "original_shapes": "resources/" + RDIR + "shapes/country_shapes.geojson",
     }
 
@@ -543,7 +547,11 @@ rule build_demand_profiles:
     input:
         base_network="networks/" + RDIR + "base.nc",
         regions="resources/" + RDIR + "bus_regions/regions_onshore.geojson",
-        load=load_data_paths,
+        load=branch(
+            config["load_options"].get("source", "gegis") in ["gegis", "ssp"],
+            get_load_paths_gegis("data", config),
+            "data/demand/forecasts_on_historical_period.parquet",
+        ),
         #gadm_shapes="resources/" + RDIR + "shapes/MAR2.geojson",
         #using this line instead of the following will test updated gadm shapes for MA.
         #To use: downlaod file from the google drive and place it in resources/" + RDIR + "shapes/
@@ -645,11 +653,13 @@ rule add_electricity:
     params:
         countries=config["countries"],
         output_currency=config["costs"]["output_currency"],
+        fill_values=config["costs"]["fill_values"],
         conventional=config.get("conventional", {}),
         electricity=config["electricity"],
         alternative_clustering=config["cluster_options"]["alternative_clustering"],
         renewable=config["renewable"],
         length_factor=config["lines"]["length_factor"],
+        existing_capacities=config["existing_capacities"],
     input:
         **{
             f"profile_{tech}": "resources/"
@@ -674,6 +684,7 @@ rule add_electricity:
         gadm_shapes="resources/" + RDIR + "shapes/gadm_shapes.geojson",
         hydro_capacities="data/hydro_capacities.csv",
         demand_profiles="resources/" + RDIR + "demand_profiles.csv",
+        nuclear_p_max_pu="data/nuclear_p_max_pu.csv",
     output:
         "networks/" + RDIR + "elec.nc",
     log:
@@ -1092,17 +1103,6 @@ rule prepare_sector_networks:
         ),
 
 
-rule override_res_all_nets:
-    input:
-        expand(
-            RESDIR
-            + "prenetworks/elec_s{simpl}_{clusters}_ec_l{ll}_{opts}_{sopts}_{planning_horizons}_{discountrate}_{demand}_presec.nc",
-            **config["scenario"],
-            **config["costs"],
-            **config["export"],
-        ),
-
-
 rule solve_sector_networks:
     input:
         expand(
@@ -1232,8 +1232,7 @@ rule prepare_sector_network:
                 for country in config["countries"]
             },
         ),
-        network=RESDIR
-        + "prenetworks/elec_s{simpl}_{clusters}_ec_l{ll}_{opts}_{sopts}_{planning_horizons}_{discountrate}_{demand}_presec.nc",
+        network="networks/" + RDIR + "elec_s{simpl}_{clusters}_ec_l{ll}_{opts}.nc",
         costs="resources/" + RDIR + "costs_{planning_horizons}_sec.csv",
         h2_cavern="data/hydrogen_salt_cavern_potentials.csv",
         nodal_energy_totals=branch(
@@ -1322,39 +1321,6 @@ rule add_export:
         + "prenetworks/elec_s{simpl}_{clusters}_ec_l{ll}_{opts}_{sopts}_{planning_horizons}_{discountrate}_{demand}_{h2export}export.nc",
     script:
         "scripts/add_export.py"
-
-
-rule override_respot:
-    params:
-        run=run["name"],
-        custom_data=config["custom_data"],
-        countries=config["countries"],
-    input:
-        **{
-            f"custom_res_pot_{tech}_{planning_horizons}_{discountrate}": "resources/"
-            + SECDIR
-            + f"custom_renewables/{tech}_{planning_horizons}_{discountrate}_potential.csv"
-            for tech in config["custom_data"]["renewables"]
-            for discountrate in config["costs"]["discountrate"]
-            for planning_horizons in config["scenario"]["planning_horizons"]
-        },
-        **{
-            f"custom_res_ins_{tech}_{planning_horizons}_{discountrate}": "resources/"
-            + SECDIR
-            + f"custom_renewables/{tech}_{planning_horizons}_{discountrate}_installable.csv"
-            for tech in config["custom_data"]["renewables"]
-            for discountrate in config["costs"]["discountrate"]
-            for planning_horizons in config["scenario"]["planning_horizons"]
-        },
-        network="networks/" + RDIR + "elec_s{simpl}_{clusters}_ec_l{ll}_{opts}.nc",
-        energy_totals="resources/"
-        + SECDIR
-        + "energy_totals_{demand}_{planning_horizons}.csv",
-    output:
-        RESDIR
-        + "prenetworks/elec_s{simpl}_{clusters}_ec_l{ll}_{opts}_{sopts}_{planning_horizons}_{discountrate}_{demand}_presec.nc",
-    script:
-        "scripts/override_respot.py"
 
 
 rule prepare_transport_data:

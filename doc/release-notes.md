@@ -12,6 +12,10 @@ This part of documentation collects descriptive release notes to capture the mai
 
 **New Features and Major Changes**
 
+* Attach wind and solar generators using real positions from `powerplants.csv` instead of using redistribution according to the population [PR #1622](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1622)
+
+* Revise implementation of myopic optimization [PR #1722](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1722)
+
 * Migrate all cost data processing to ``process_cost_data.py`` [PR #1719](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1719)
 
 * Add the rule `retrieve_cutout` using the same script from `retrieve_databundle_light`. The `bundle_to_download` excludes cutouts while `cutout_to_download` include only cutouts. The retrieved cutouts are then verified to ensure their total bounds match the outputs from `build_shapes`. The config `enable: retrieve_cutout` allows users to switch off this rule after retrieval. [PR #1767](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1767)
@@ -22,7 +26,41 @@ This part of documentation collects descriptive release notes to capture the mai
 
 * Ensure connectivity of transformers in buses with several transformers [PR #1706](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1706)
 
+* Enable green-field capacity expansion of custom lines under construction [PR #1778](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1778)
+
+* Remove unused override_respot [PR #1805](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1805)
+
+* Integrate DemandCast dataset for electricity demand [PR #1725](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1725)
+
 **Minor Changes and bug-fixing**
+
+* Avoid crash in `build_osm_network` when merging substations with the same `station_id` if `tag_substation` or `symbol` contains missing OSM metadata [PR #1818](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1818)
+
+* Add CI to update reference objective values [PR #1811](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1811)
+
+* Fix `UnboundLocalError` and back-pressure RHS leak in `add_chp_constraints` [#1814](https://github.com/pypsa-meets-earth/pypsa-earth/issues/1814)
+
+* Add config parameter `enable_electricity_connection_cost`, which adds electricity grid connection costs to fixed capital costs for solar and onwind generators in prepare_sector_network [PR #1810](https://github.com/pypsa-meets-earth/pypsa-earth/issues/1810)
+
+* Avoid crash in `add_chp_constraints` when the network has no links, supporting operational models without brownfield/expandable batteries, pumped storage, or DC links [PR #1750](https://github.com/pypsa-meets-earth/pypsa-earth/issues/1750)
+
+* Update configuration of powerplantmatching [PR #1787](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1787)
+
+* Avoid crash in add_electricity when no extendable generators are configured [PR #1794](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1794)
+
+* Include country-specific nuclear `p_max_pu` values based on IAEA dataset [PR #1718](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1718)
+
+* Included critical step in the documentation to confirm Terms and Conditions on Copernicus portal to allow for unrestricted use of API. [PR #1785](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1785)
+
+* Update biomass transport cost for Australia [PR #1784](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1784)
+
+* Convert dangling `custom_data.rst` to MkDocs Markdown and add Custom Data Integration page to the User Guide [PR #1767](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1767)
+
+* Enhance CI test for myopic optimization (`test/config.myopic.yaml`) by including additional horizon [PR #1776](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1776)
+
+* Add options to use custom shapes for offshore subregions [PR #1769](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1769)
+
+* In `cluster_network`, replace custom voronoi polygon calculation function with Geopandas `gdf.voronoi_polygons` method [PR #1771](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1771)
 
 * Add `auto` as an option in renewable cutout selection, which directs to the cutout defined in `atlite: default`. This is executed using the function `update_cutout_config(config)`. Furthermore, improve `terminate_if_cutout_exist(w)` to be based purely on wildcards of the cutouts name that are to be downloaded. This is applied to both `build_cutout` and `retrieve_cutout`. [PR #1767](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1767)
 
@@ -60,6 +98,7 @@ This part of documentation collects descriptive release notes to capture the mai
 
 * Make checking the need for exclusion rasters more explicit [PR #1755](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1755)
 
+* Dissolve geometries with duplicated GADM IDs, typical of regions with contested regions [PR #1759](https://github.com/pypsa-meets-earth/pypsa-earth/pull/1759)
 
 # PyPSA-Earth 0.8.0
 

@@ -279,19 +279,6 @@ def get_GADM_layer(
         # in the GADM processing of sub-national zones
         geodf_temp["GADM_ID"] = geodf_temp[f"GID_{cur_layer_id}"]
 
-        # from pypsa-earth-sec
-        # if layer_id == 0:
-        #     geodf_temp["GADM_ID"] = geodf_temp[f"GID_{cur_layer_id}"].apply(
-        #         lambda x: two_2_three_digits_country(x[:2])
-        #     ) + pd.Series(range(1, geodf_temp.shape[0] + 1)).astype(str)
-        # else:
-        #     # create a subindex column that is useful
-        #     # in the GADM processing of sub-national zones
-        #     # Fix issues with missing "." in selected cases
-        #     geodf_temp["GADM_ID"] = geodf_temp[f"GID_{cur_layer_id}"].apply(
-        #         lambda x: x if x[3] == "." else x[:3] + "." + x[3:]
-        #     )
-
         # append geodataframes
         geodf_list.append(geodf_temp)
 
@@ -1693,6 +1680,15 @@ def gadm(
         lambda x: x if x.find(".") == 0 else "." + x
     )
     df_gadm.set_index("GADM_ID", inplace=True)
+    idx_duplicated = df_gadm.index.duplicated(keep=False)
+    if idx_duplicated.any():
+        all_duplicated = idx_duplicated.sum()
+        list_duplicated = df_gadm.index[idx_duplicated].unique()
+        n_duplicated = df_gadm.index.duplicated(keep="first").sum()
+        logger.warning(
+            f"Duplicated GADM_ID found, dissolving {all_duplicated} geometries with the same GADM_ID into {n_duplicated} shapes: {list_duplicated}"
+        )
+        df_gadm = df_gadm.dissolve(by=df_gadm.index)
 
     if simplify_gadm:
         df_gadm["geometry"] = df_gadm["geometry"].map(
@@ -1880,6 +1876,7 @@ def generate_points_every_km(
         geometry="geometry",
         crs=geo_crs,
     )
+    points_gdf.index.name = "points"
 
     return points_gdf
 
@@ -1923,7 +1920,7 @@ def determine_subregion_country(
 def crop_offshore(
     subregion_shapes: gpd.GeoDataFrame,
     country_shapes: gpd.GeoDataFrame,
-    offshore_shapes: gpd.GeoDataFrame,
+    offshore_shapes: gpd.GeoSeries,
     distance_crs: str = "EPSG:3857",
 ) -> gpd.GeoDataFrame:
     """
@@ -1936,8 +1933,8 @@ def crop_offshore(
         GeoDataFrame indexed by subregion name containing onshore geometries with a defined CRS.
     country_shapes : GeoDataFrame
         GeoDataFrame of country geometries used to determine which country each subregion belongs to.
-    offshore_shapes : GeoDataFrame
-        GeoDataFrame indexed by country name containing offshore (e.g., EEZ) geometries to be partitioned.
+    offshore_shapes : GeoSeries
+        GeoSeries indexed by name containing offshore (e.g., EEZ) geometries to be partitioned.
     distance_crs : str, default "EPSG:3857"
         Projected CRS used for distance-based operations and Voronoi partitioning.
 
@@ -1948,7 +1945,7 @@ def crop_offshore(
         either equal to the full country offshore area (single subregion) or Voronoi-partitioned among multiple subregions.
     """
 
-    from build_bus_regions import custom_voronoi_partition_pts
+    from build_bus_regions import voronoi
 
     # Determine country for each subregion
     subregion_dict = determine_subregion_country(
@@ -1963,11 +1960,8 @@ def crop_offshore(
     results = []
 
     # Group once instead of value_counts + filtering
-    for country, sub_shape in subregion_shapes.groupby("country"):
-        if country not in offshore_shapes.index:
-            continue
-
-        outline = offshore_shapes.loc[country].geometry
+    for country, outline in offshore_shapes.items():
+        sub_shape = subregion_shapes[subregion_shapes["country"] == country].copy()
 
         # If only one subregion → just use outline
         if len(sub_shape) == 1:
@@ -1987,12 +1981,14 @@ def crop_offshore(
 
             coords = points_gdf.geometry.get_coordinates()[["x", "y"]]
 
-            voronoi_geoms = custom_voronoi_partition_pts(
-                coords,
-                outline,
-                add_bounds_shape=True,
-                multiplier=5,
-            )
+            if len(coords) > 1000:
+                logger.warning(
+                    f"Voronoi partitioning for {country} with {len(coords)} points may be slow. "
+                    "Consider increasing the `interval_km` parameter to reduce the number of points, "
+                    "or set `build_shape_options: simplify_gadm:` as True."
+                )
+
+            voronoi_geoms = voronoi(coords, outline)
 
             points_gdf = points_gdf.copy()
             points_gdf["geometry"] = voronoi_geoms
@@ -2088,6 +2084,7 @@ if __name__ == "__main__":
     subregion_config = snakemake.params.subregion
     subregion_method = subregion_config.get("method")
 
+    # Prepare subregion shapes based on GADM, otherwise place empty GeoDataFrame.
     if subregion_method == "gadm":
         define_by_gadm = subregion_config["define_by_gadm"]
         subregion_shapes = crop_country(gadm_shapes, define_by_gadm)
@@ -2101,11 +2098,12 @@ if __name__ == "__main__":
 
     save_to_geojson(subregion_shapes, out.subregion_shapes)
 
-    if subregion_method == "custom":
+    # If the custom method is selected and no custom offshore path is provided,
+    # generate offshore shapes from the custom subregion shapes.
+    has_custom_offshore = subregion_config["path_custom_offshore"]
+    if subregion_method == "custom" and not has_custom_offshore:
         custom_path = subregion_config["path_custom_shapes"]
-        subregion_shapes = gpd.read_file(custom_path, geometry="geometry").set_index(
-            "name"
-        )
+        subregion_shapes = gpd.read_file(custom_path).set_index("name")
 
     if not subregion_shapes.empty:
         subregion_offshore = crop_offshore(
