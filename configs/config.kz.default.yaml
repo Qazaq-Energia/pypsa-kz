@@ -1,0 +1,89 @@
+# SPDX-FileCopyrightText:  PyPSA-KZ Authors
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+
+countries: ["KZ"]
+
+custom_rules:
+- rules/kz_model/post-processing.smk
+
+run:
+  name: "KZ"
+  sector_name: "KZ"
+  shared_cutouts: false
+
+scenario:
+  simpl: [""]
+  ll: ["v1.0"]
+  clusters: [17]
+  opts: [1h]
+  planning_horizons:
+  - 2025
+  sopts:
+  - "1h"
+
+snapshots:
+  start: "2013-01-01"
+  end: "2014-01-01"
+  inclusive: "left"
+
+enable:
+  retrieve_databundle: true
+  retrieve_cutout: true
+
+build_shape_options:
+  gadm_layer_id: 1
+
+osm:
+  clean_osm_data:
+    threshold_voltage: 35000
+
+cluster_options:
+  simplify_network:
+    remove_stubs: true
+    remove_stubs_across_borders: false
+    p_threshold_drop_isolated: false
+    p_threshold_merge_isolated: false
+    s_threshold_fetch_isolated: 0.05
+  alternative_clustering: false
+
+base_network:
+  min_voltage_substation_offshore: 35000
+  min_voltage_rebase_voltage: 35000
+
+electricity:
+  extendable_carriers:
+    Generator: []
+    StorageUnit: []
+    Store: []
+    Link: []
+
+  powerplants_filter: (DateOut >= 2022 or DateOut != DateOut) and (DateIn <= 2023 or DateIn != DateIn)
+  custom_powerplants:
+    method: false
+
+  conventional_carriers: [nuclear, oil, OCGT, CCGT, coal, lignite, geothermal, biomass]
+  renewable_carriers: [solar, onwind, offwind-ac, offwind-dc, hydro]
+
+  estimate_renewable_capacities:
+    stats: "irena"
+
+  base_voltage: 500.
+  voltages: [110., 220., 500.]
+
+lines:
+  ac_types:
+    110.: "149-AL1/24-ST1A 110.0"
+    220.: "305-AL1/39-ST1A 110.0"
+    500.: "490-AL1/64-ST1A 380.0"
+  dc_types:
+    500.: "HVDC XLPE 1000"
+
+co2:
+  base: 3.17e+8  # Kazakhstan default for 1990
+
+solving:
+  solver:
+    name: gurobi
+    options: gurobi-default
