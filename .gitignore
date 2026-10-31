@@ -77,3 +77,7 @@ screenlog*
 !data/demand/unsd/paths/Energy_Statistics_Database.xlsx
 site/
 !data/industry/ammonia_plants.csv
+
+# Include KZ-specific data
+!data/kz/
+!data/kz/*.csv
