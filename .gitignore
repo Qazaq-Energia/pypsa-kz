@@ -78,5 +78,6 @@ screenlog*
 site/
 !data/industry/ammonia_plants.csv
 
-# Exclude KZ-specific files
-!data/kz_model/custom_powerplants.csv
+# Include KZ-specific data
+!data/kz/
+!data/kz/*.csv

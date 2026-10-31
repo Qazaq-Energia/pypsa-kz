@@ -60,7 +60,9 @@ electricity:
 
   powerplants_filter: (DateOut >= 2025 or DateOut != DateOut) and (DateIn <= 2025 or DateIn != DateIn)
   custom_powerplants:
-    method: true
+    method: replace
+    filepaths:
+    - data/kz/custom_powerplants_v2025.csv
 
   conventional_carriers: [nuclear, oil, OCGT, CCGT, coal, lignite, geothermal, biomass]
   renewable_carriers: [solar, onwind, offwind-ac, offwind-dc, hydro]
@@ -86,3 +88,9 @@ solving:
   solver:
     name: gurobi
     options: gurobi-default
+
+# KZ-specific settings
+kz:
+  capacity_comparison:
+    historic_year: 2025  # year of the statistics in historic_capacities (installed capacity at end of year)
+    historic_capacities: data/kz/historic_capacities.csv
