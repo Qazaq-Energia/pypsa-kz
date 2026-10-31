@@ -1,12 +1,11 @@
-# SPDX-FileCopyrightText:  PyPSA-KZ Authors
+# SPDX-FileCopyrightText:  PyPSA-KZ contributors
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 
 countries: ["KZ"]
 
-custom_rules:
-- rules/kz_model/post-processing.smk
+custom_rules: ["rules/kz/main.smk"]
 
 run:
   name: "KZ"
@@ -59,15 +58,15 @@ electricity:
     Store: []
     Link: []
 
-  powerplants_filter: (DateOut >= 2022 or DateOut != DateOut) and (DateIn <= 2023 or DateIn != DateIn)
+  powerplants_filter: (DateOut >= 2025 or DateOut != DateOut) and (DateIn <= 2025 or DateIn != DateIn)
   custom_powerplants:
-    method: false
+    method: true
 
   conventional_carriers: [nuclear, oil, OCGT, CCGT, coal, lignite, geothermal, biomass]
   renewable_carriers: [solar, onwind, offwind-ac, offwind-dc, hydro]
 
   estimate_renewable_capacities:
-    stats: "irena"
+    stats: false
 
   base_voltage: 500.
   voltages: [110., 220., 500.]
