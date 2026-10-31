@@ -143,7 +143,9 @@ def get_historic_capacities(fn: str, year: int, zone: str = "KZ") -> pd.Series:
     df = df.loc[df["group"].isin(HISTORIC_GROUPS)]
 
     if df.empty:
-        raise ValueError(f"No historic capacities for year {year} and zone {zone} in {fn}.")
+        raise ValueError(
+            f"No historic capacities for year {year} and zone {zone} in {fn}."
+        )
 
     for source in df["source"].dropna().unique():
         logger.info(f"Historic capacities {year}: {source}")
@@ -280,7 +282,9 @@ if __name__ == "__main__":
     capacities["input_vs_historic_%"] = (
         capacities["input"] / capacities[historic.name] - 1
     ).mul(100)
-    capacities["model_vs_input_%"] = (capacities["model"] / capacities["input"] - 1).mul(100)
+    capacities["model_vs_input_%"] = (
+        capacities["model"] / capacities["input"] - 1
+    ).mul(100)
 
     logger.info(f"Capacities [MW]:\n{capacities.round(1)}")
 
