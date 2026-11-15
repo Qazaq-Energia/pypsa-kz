@@ -1,0 +1,112 @@
+year,zone,group,capacity_mw,source,note
+2020,KZ,coal,13407.0,"KEGOC Annual Report 2020, p. 46-47 (installed capacity as of 31.12.2020)",coal-fired steam turbines
+2020,KZ,gas_steam,3997.5,"KEGOC Annual Report 2020, p. 46-47 (installed capacity as of 31.12.2020)",gas- and fuel-oil-fired steam turbines
+2020,KZ,gas_turbine,2015.0,"KEGOC Annual Report 2020, p. 46-47 (installed capacity as of 31.12.2020)",gas turbines
+2020,KZ,hydro,2734.1,"KEGOC Annual Report 2020, p. 46-47 (installed capacity as of 31.12.2020)",incl. small hydro 211.5 MW
+2020,KZ,wind,508.6,"KEGOC Annual Report 2020, p. 46-47 (installed capacity as of 31.12.2020)",
+2020,KZ,solar,958.3,"KEGOC Annual Report 2020, p. 46-47 (installed capacity as of 31.12.2020)",
+2020,KZ,biomass,1.067,"KEGOC Annual Report 2020, p. 46-47 (installed capacity as of 31.12.2020)",biogas plants
+2020,KZ,total,23621.6,"KEGOC Annual Report 2020, p. 46-47 (installed capacity as of 31.12.2020)",
+2020,North,total,15892.7,"KEGOC Annual Report 2020, p. 46-47 (installed capacity as of 31.12.2020)",
+2020,West,total,3533.1,"KEGOC Annual Report 2020, p. 46-47 (installed capacity as of 31.12.2020)",
+2020,South,total,4195.7,"KEGOC Annual Report 2020, p. 46-47 (installed capacity as of 31.12.2020)",
+2021,KZ,coal,13384.5,"KEGOC Annual Report 2021, p. 36-37 (installed capacity as of 31.12.2021)",coal-fired steam turbines
+2021,KZ,gas_steam,4010.0,"KEGOC Annual Report 2021, p. 36-37 (installed capacity as of 31.12.2021)",gas- and fuel-oil-fired steam turbines
+2021,KZ,gas_turbine,2061.7,"KEGOC Annual Report 2021, p. 36-37 (installed capacity as of 31.12.2021)",gas turbines
+2021,KZ,hydro,2806.2,"KEGOC Annual Report 2021, p. 36-37 (installed capacity as of 31.12.2021)",incl. small hydro 271.4 MW
+2021,KZ,wind,659.5,"KEGOC Annual Report 2021, p. 36-37 (installed capacity as of 31.12.2021)",
+2021,KZ,solar,1034.3,"KEGOC Annual Report 2021, p. 36-37 (installed capacity as of 31.12.2021)",
+2021,KZ,biomass,1.1,"KEGOC Annual Report 2021, p. 36-37 (installed capacity as of 31.12.2021)",biogas plants
+2021,KZ,total,23957.3,"KEGOC Annual Report 2021, p. 36-37 (installed capacity as of 31.12.2021)",
+2021,North,total,16079.1,"KEGOC Annual Report 2021, p. 36-37 (installed capacity as of 31.12.2021)",
+2021,West,total,3561.5,"KEGOC Annual Report 2021, p. 36-37 (installed capacity as of 31.12.2021)",
+2021,South,total,4316.7,"KEGOC Annual Report 2021, p. 36-37 (installed capacity as of 31.12.2021)",
+2022,KZ,coal,13375.0,"KEGOC Annual Report 2022, p. 12 (installed capacity as of 31.12.2022)",coal-fired steam turbines
+2022,KZ,gas_steam,4026.5,"KEGOC Annual Report 2022, p. 12 (installed capacity as of 31.12.2022)",gas- and fuel-oil-fired steam turbines
+2022,KZ,gas_turbine,2059.7,"KEGOC Annual Report 2022, p. 12 (installed capacity as of 31.12.2022)",gas turbines
+2022,KZ,hydro,2807.5,"KEGOC Annual Report 2022, p. 12 (installed capacity as of 31.12.2022)",incl. small hydro 272.7 MW
+2022,KZ,wind,1107.8,"KEGOC Annual Report 2022, p. 12 (installed capacity as of 31.12.2022)",
+2022,KZ,solar,1146.2,"KEGOC Annual Report 2022, p. 12 (installed capacity as of 31.12.2022)",
+2022,KZ,biomass,1.1,"KEGOC Annual Report 2022, p. 12 (installed capacity as of 31.12.2022)",biogas plants
+2022,KZ,total,24523.7,"KEGOC Annual Report 2022, p. 12 (installed capacity as of 31.12.2022)",
+2022,North,total,16458.8,"KEGOC Annual Report 2022, p. 12 (installed capacity as of 31.12.2022)",
+2022,West,total,3561.5,"KEGOC Annual Report 2022, p. 12 (installed capacity as of 31.12.2022)",
+2022,South,total,4503.4,"KEGOC Annual Report 2022, p. 12 (installed capacity as of 31.12.2022)",
+2023,KZ,coal,13075.0,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",coal-fired steam turbines
+2023,KZ,gas_steam,4088.5,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",gas- and fuel-oil-fired steam turbines
+2023,KZ,gas_turbine,2059.7,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",gas turbines
+2023,KZ,hydro,2810.1,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",incl. small hydro 275.3 MW
+2023,KZ,wind,1411.3,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",
+2023,KZ,solar,1196.2,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",
+2023,KZ,biomass,1.1,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",biogas plants
+2023,KZ,total,24641.9,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",
+2023,North,total,16369.4,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",
+2023,West,total,3566.5,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",
+2023,South,total,4706.1,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",
+2023,North,thermal,13328.9,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",TPP incl. GTPP
+2023,North,gas_turbine,544.4,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",included in thermal
+2023,North,hydro,1811.7,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",
+2023,North,wind,821.7,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",
+2023,North,solar,406.0,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",
+2023,North,biomass,1.1,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",
+2023,West,thermal,3448.1,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",TPP incl. GTPP
+2023,West,gas_turbine,1469.1,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",included in thermal
+2023,West,wind,116.4,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",
+2023,West,solar,2.0,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",
+2023,South,thermal,2446.2,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",TPP incl. GTPP
+2023,South,gas_turbine,46.2,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",included in thermal
+2023,South,hydro,998.4,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",
+2023,South,wind,473.2,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",
+2023,South,solar,788.2,"KEGOC Annual Report 2023, p. 8 (installed capacity as of 01.01.2024)",
+2024,KZ,coal,13592.0,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",coal-fired steam turbines
+2024,KZ,gas_steam,4039.5,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",gas- and fuel-oil-fired steam turbines
+2024,KZ,gas_turbine,2109.3,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",gas turbines
+2024,KZ,hydro,2830.0,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",incl. small hydro 295.2 MW
+2024,KZ,wind,1525.7,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",
+2024,KZ,solar,1216.6,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",
+2024,KZ,biomass,1.1,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",biogas plants
+2024,KZ,total,25314.2,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",
+2024,North,total,16957.7,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",
+2024,West,total,3580.5,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",
+2024,South,total,4776.0,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",
+2024,North,thermal,13850.5,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",TPP incl. GTPP
+2024,North,gas_turbine,610.0,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",included in thermal
+2024,North,hydro,1811.7,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",
+2024,North,wind,888.1,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",
+2024,North,solar,406.3,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",
+2024,North,biomass,1.1,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",
+2024,West,thermal,3414.1,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",TPP incl. GTPP
+2024,West,gas_turbine,1435.1,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",included in thermal
+2024,West,wind,164.4,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",
+2024,West,solar,2.0,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",
+2024,South,thermal,2476.2,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",TPP incl. GTPP
+2024,South,gas_turbine,64.2,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",included in thermal
+2024,South,hydro,1018.3,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",
+2024,South,wind,473.2,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",
+2024,South,solar,808.2,"KEGOC Annual Report 2024, p. 17 (installed capacity as of 01.01.2025)",
+2025,KZ,coal,13679.0,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),coal-fired steam turbines
+2025,KZ,gas_steam,4074.5,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),gas- and fuel-oil-fired steam turbines
+2025,KZ,gas_turbine,2772.4,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),gas turbines
+2025,KZ,hydro,2856.0,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),incl. small hydro 321.0 MW
+2025,KZ,wind,2071.0,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),
+2025,KZ,solar,1353.0,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),
+2025,KZ,biomass,1.1,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),biogas plants
+2025,KZ,total,26807.0,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),
+2025,North,total,17544.4,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),
+2025,West,total,4402.5,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),
+2025,South,total,4860.1,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),
+2025,North,thermal,13937.5,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),TPP incl. GTPP
+2025,North,gas_turbine,610.0,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),included in thermal
+2025,North,hydro,1811.7,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),
+2025,North,wind,1383.4,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),
+2025,North,solar,410.7,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),
+2025,North,biomass,1.1,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),
+2025,West,thermal,4116.1,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),TPP incl. GTPP
+2025,West,gas_turbine,2060.1,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),included in thermal
+2025,West,wind,214.4,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),
+2025,West,solar,72.0,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),
+2025,South,thermal,2472.3,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),TPP incl. GTPP
+2025,South,gas_turbine,102.3,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),included in thermal
+2025,South,hydro,1044.3,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),
+2025,South,wind,473.2,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),
+2025,South,solar,870.2,KEGOC Annual Report 2025 (installed capacity as of 01.01.2026),
